@@ -44,7 +44,6 @@ void MainWindow::onFixXML() {
 		file.open(QIODevice::ReadOnly);
 
 		QString file_content;
-		file_content = "<objects>\n";
 
 		QTextStream in(&file);
 		while (!in.atEnd()) {
@@ -53,8 +52,18 @@ void MainWindow::onFixXML() {
 		}
 		file.close();
 
-		file_content += "</objects>\n";
+		// if the file is already fixed, skip it.
+		if (file_content.startsWith("<objects>")) continue;
 
+		file_content = "<objects>\n" + file_content + "</objects>\n";
+
+		// replace <x> by <y>, <y> by <x>
+		file_content.replace("<x>", "<z>");
+		file_content.replace("</x>", "</z>");
+		file_content.replace("<y>", "<x>");
+		file_content.replace("</y>", "</x>");
+		file_content.replace("<z>", "<y>");
+		file_content.replace("</z>", "</y>");
 
 		file.open(QIODevice::WriteOnly);
 		QTextStream out(&file);

@@ -83,10 +83,10 @@ void Canvas::loadAnnotation(const QString& filename, int width, int height) {
 					QDomNode coord_node = data_node.firstChild();
 					while (!coord_node.isNull()) {
 						if (coord_node.toElement().tagName() == "x") {
-							ys.push_back(getNodeValue(coord_node).toFloat() * height);
+							xs.push_back(getNodeValue(coord_node).toFloat() * width);
 						}
 						else if (coord_node.toElement().tagName() == "y") {
-							xs.push_back(getNodeValue(coord_node).toFloat() * width);
+							ys.push_back(getNodeValue(coord_node).toFloat() * height);
 						}
 
 						coord_node = coord_node.nextSibling();

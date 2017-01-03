@@ -32,6 +32,7 @@ public:
     QWidget *centralWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
+    QMenu *menuTool;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -54,6 +55,8 @@ public:
         menuBar->setGeometry(QRect(0, 0, 800, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
+        menuTool = new QMenu(menuBar);
+        menuTool->setObjectName(QStringLiteral("menuTool"));
         MainWindowClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindowClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -63,9 +66,11 @@ public:
         MainWindowClass->setStatusBar(statusBar);
 
         menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuTool->menuAction());
         menuFile->addAction(actionOpen);
         menuFile->addSeparator();
         menuFile->addAction(actionExit);
+        menuTool->addAction(actionFixXML);
 
         retranslateUi(MainWindowClass);
 
@@ -79,6 +84,7 @@ public:
         actionExit->setText(QApplication::translate("MainWindowClass", "Exit", 0));
         actionFixXML->setText(QApplication::translate("MainWindowClass", "Fix XML", 0));
         menuFile->setTitle(QApplication::translate("MainWindowClass", "File", 0));
+        menuTool->setTitle(QApplication::translate("MainWindowClass", "Tool", 0));
     } // retranslateUi
 
 };
